@@ -26,13 +26,15 @@ const RewardsListScreen = props => {
 
     return (
         <View>
-            <Button
-                style={styles.button}
-                onPress={() => {
-                    setShowRewards(!showRewards)
-                }}
-                title={showRewards ? "Rewards" : "Collected rewards"}>
-            </Button>
+            <View style={styles.button}>
+                <Button
+                    color="#329194"
+                    onPress={() => {
+                        setShowRewards(!showRewards)
+                    }}
+                    title={showRewards ? "Rewards" : "Collected rewards"}>
+                </Button>
+            </View>
             {!showRewards && (
                 <View>
                     <FlatList
@@ -57,14 +59,16 @@ const RewardsListScreen = props => {
                             <Text>{itemData.item.name}</Text>
                         )}
                     />
-                    <Button
-                        disabled = {collectedRewards.lenght === 0}
-                        onPress={() => {
-                            dispatch(rewardsActions.clearRewards());
-                            setShowRewards(!showRewards)
-                        }}
-                        title="Clear rewards">
-                    </Button>
+                    <View style={styles.button}>
+                        <Button
+                            color="#329194"
+                            onPress={() => {
+                                dispatch(rewardsActions.clearRewards());
+                                setShowRewards(!showRewards)
+                            }}
+                            title="Clear rewards">
+                        </Button>
+                    </View>
                 </View>
             )}
         </View>
@@ -74,7 +78,7 @@ const RewardsListScreen = props => {
 
 const styles = StyleSheet.create({
     button: {
-        marginBottom : 10,
+        marginBottom: 10,
         backgroundColor: '#329194',
         borderRadius: 35,
         justifyContent: 'center',
