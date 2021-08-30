@@ -4,8 +4,7 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    TouchableNativeFeedback,
-    Button
+    Image
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import * as rewardsActions from '../store/actions/rewards';
@@ -18,9 +17,14 @@ const RewardItem = props => {
                 <View style={styles.details}>
                     <Text style={styles.name}>{props.name}</Text>
                     <Text style={styles.needed_points}>{props.needed_points}</Text>
+                    <View style={styles.imageContainer}>
+                        {!!props.image && (
+                            <Image style={styles.image} source={{ uri: props.image }} />
+                        )}
+                    </View>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity
-                            onPress={() => { dispatch(rewardsActions.addReward(props)) } }
+                            onPress={() => { dispatch(rewardsActions.addReward(props)) }}
                             style={[styles.button]}>
                             <Text>+</Text>
                         </TouchableOpacity>
@@ -51,6 +55,15 @@ const styles = StyleSheet.create({
         fontSize: 12,
         marginVertical: 2,
         color: "#1F2B37"
+    },
+    imageContainer: {
+        flex: 1,
+        paddingLeft: 5
+    },
+    image: {
+
+        width: 50,
+        height: 50,
     },
     buttonContainer: {
         flex: 1,

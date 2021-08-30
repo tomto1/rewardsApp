@@ -25,9 +25,7 @@ export default (state = initialState, action) => {
       };
 
     case CLEAR_COLLECT_REWARDS:
-        console.log("tu sam",{        ...state,
-          collect: []})
-        return {
+      return {
         ...state,
         collect: []
       };

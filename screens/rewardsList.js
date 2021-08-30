@@ -19,22 +19,19 @@ const RewardsListScreen = props => {
     const [showRewards, setShowRewards] = useState(false);
 
 
-    // console.log(collectedRewards.length>0)
     useEffect(() => {
         dispatch(rewardsActions.fetchRewards());
     }, [dispatch]);
 
     return (
         <View>
-            <View style={styles.button}>
-                <Button
-                    color="#329194"
-                    onPress={() => {
-                        setShowRewards(!showRewards)
-                    }}
-                    title={showRewards ? "Rewards" : "Collected rewards"}>
-                </Button>
-            </View>
+            <Button
+                color="#329194"
+                onPress={() => {
+                    setShowRewards(!showRewards)
+                }}
+                title={showRewards ? "Rewards" : "Collected rewards"}>
+            </Button>
             {!showRewards && (
                 <View>
                     <FlatList
@@ -42,8 +39,10 @@ const RewardsListScreen = props => {
                         keyExtractor={item => item.id}
                         renderItem={itemData => (
                             <RewardItem
+                                id={itemData.item.id}
                                 name={itemData.item.name}
                                 needed_points={itemData.item.needed_points}
+                                image={itemData.item.image}
                             >
                             </RewardItem>
                         )}
@@ -59,16 +58,14 @@ const RewardsListScreen = props => {
                             <Text>{itemData.item.name}</Text>
                         )}
                     />
-                    <View style={styles.button}>
-                        <Button
-                            color="#329194"
-                            onPress={() => {
-                                dispatch(rewardsActions.clearRewards());
-                                setShowRewards(!showRewards)
-                            }}
-                            title="Clear rewards">
-                        </Button>
-                    </View>
+                    <Button
+                        color="#329194"
+                        onPress={() => {
+                            dispatch(rewardsActions.clearRewards());
+                            setShowRewards(!showRewards)
+                        }}
+                        title="Clear rewards">
+                    </Button>
                 </View>
             )}
         </View>
